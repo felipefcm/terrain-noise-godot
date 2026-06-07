@@ -4,4 +4,12 @@
 
 [node name="SunLight" type="DirectionalLight3D"]
 transform = Transform3D( 1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 10.7996, 0 )
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.2
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 2.0
+directional_shadow_mode = 1
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 200.0
 script = ExtResource( 1 )

@@ -69,3 +69,4 @@ fly_down={
 
 environment/defaults/default_environment="res://default_env.tres"
 quality/filters/msaa=1
+lights_and_shadows/directional_shadow/size=4096
