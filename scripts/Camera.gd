@@ -1,7 +1,7 @@
-extends Camera
+extends Camera3D
 
-export (float) var moveSensitivity = 5;
-export (float) var lookSensitivity = 0.1;
+@export var moveSensitivity: float = 5;
+@export var lookSensitivity: float = 0.1;
 
 var forward: Vector3;
 
@@ -36,7 +36,7 @@ func handleKey(delta: float):
 	) * moveSensitivity * delta;
 
 	translate_object_local(motion);
-	get_tree().set_input_as_handled();
+	get_viewport().set_input_as_handled();
 
 func handleMouseMotion(event: InputEventMouseMotion):
 	
@@ -44,4 +44,4 @@ func handleMouseMotion(event: InputEventMouseMotion):
 	rotation_degrees.x += -direction.y * lookSensitivity;
 	rotation_degrees.y += -direction.x * lookSensitivity;
 
-	get_tree().set_input_as_handled();
+	get_viewport().set_input_as_handled();

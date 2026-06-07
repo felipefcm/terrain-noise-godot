@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/PlaneTerrain.gd" type="Script" id=1]
 [ext_resource path="res://materials/VertexColor.tres" type="Material" id=2]
 
-[node name="PlaneTerrain" type="MeshInstance"]
+[node name="PlaneTerrain" type="MeshInstance3D"]
 material_override = ExtResource( 2 )
 script = ExtResource( 1 )
 water = Color( 0, 0.247059, 0.627451, 1 )

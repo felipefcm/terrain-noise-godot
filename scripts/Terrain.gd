@@ -1,24 +1,24 @@
-extends Spatial
+extends Node3D
 
-export (PackedScene) var block;
-export (Material) var grass;
-export (Material) var dirt;
-export (Material) var sand;
-export (Material) var water;
-export (Material) var ice;
+@export var block: PackedScene;
+@export var grass: Material;
+@export var dirt: Material;
+@export var sand: Material;
+@export var water: Material;
+@export var ice: Material;
 
-export (int) var width = 64;
-export (int) var depth = 64;
-export (int) var layers = 1;
-export (float) var blockSize = 1;
+@export var width: int = 64;
+@export var depth: int = 64;
+@export var layers: int = 1;
+@export var blockSize: float = 1;
 
-var noise: OpenSimplexNoise;
+var noise: FastNoiseLite;
 
 func _ready():
 	
-	noise = OpenSimplexNoise.new();
+	noise = FastNoiseLite.new();
 	noise.seed = randi();
-	noise.octaves = 1;
+	noise.fractal_octaves = 1;
 	
 	generateTerrain();
 
@@ -39,14 +39,14 @@ func generateCell(layer: int, x: int, z: int):
 	var value = noise.get_noise_3dv(mapPosition);
 	if(value < -0.5): return;
 	
-	var cell: CSGBox = block.instance();
+	var cell: CSGBox3D = block.instantiate();
 	cell.width = blockSize;
 	cell.height = blockSize;
 	cell.depth = blockSize;
 
 	cell.material = determineCellMaterial(worldPosition);
 
-	cell.translation = to_local(worldPosition);
+	cell.position = to_local(worldPosition);
 	add_child(cell);
 
 func determineCellMaterial(position: Vector3) -> Material:

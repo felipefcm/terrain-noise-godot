@@ -1,32 +1,32 @@
-extends MeshInstance
+extends MeshInstance3D
 
-export (int) var sizeX = 384;
-export (int) var sizeZ = 384;
-export (float) var heightMultiplier = 50;
-export (Vector2) var mapSize = Vector2(128, 128);
+@export var sizeX: int = 384;
+@export var sizeZ: int = 384;
+@export var heightMultiplier: float = 50;
+@export var mapSize: Vector2 = Vector2(128, 128);
 
-export (Color, RGB) var water;
-export (Color, RGB) var dirt;
-export (Color, RGB) var sand;
-export (Color, RGB) var grass;
-export (Color, RGB) var forest;
-export (Color, RGB) var ice;
+@export var water; # (Color, RGB)
+@export var dirt; # (Color, RGB)
+@export var sand; # (Color, RGB)
+@export var grass; # (Color, RGB)
+@export var forest; # (Color, RGB)
+@export var ice; # (Color, RGB)
 
-var elevationNoise: OpenSimplexNoise;
-var moistureNoise: OpenSimplexNoise;
+var elevationNoise: FastNoiseLite;
+var moistureNoise: FastNoiseLite;
 
 func _ready():
 
-	elevationNoise = OpenSimplexNoise.new();
+	elevationNoise = FastNoiseLite.new();
 	elevationNoise.seed = randi();
-	elevationNoise.octaves = 8;
+	elevationNoise.fractal_octaves = 8;
 	# elevationNoise.lacunarity = 1.5;
 	# elevationNoise.period = 20;
 	# elevationNoise.persistence = 0.2;
 
-	moistureNoise = OpenSimplexNoise.new();
+	moistureNoise = FastNoiseLite.new();
 	moistureNoise.seed = randi();
-	moistureNoise.octaves = 5;
+	moistureNoise.fractal_octaves = 5;
 	# moistureNoise.lacunarity = 1.5;
 	moistureNoise.period = 40;
 	# moistureNoise.persistence = 0.2;

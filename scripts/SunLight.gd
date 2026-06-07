@@ -1,13 +1,13 @@
-extends DirectionalLight
+extends DirectionalLight3D
 
-export (float) var speed = 0.5;
+@export var speed: float = 0.5;
 
 var direction: int = -1;
 var moving := false;
 
 func _unhandled_input(event):
 	if(event is InputEventKey):
-		if(event.scancode == KEY_M):
+		if(event.keycode == KEY_M):
 			moving = !moving;
 
 func _process(delta):

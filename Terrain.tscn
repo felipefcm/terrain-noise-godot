@@ -8,7 +8,7 @@
 [ext_resource path="res://materials/Water.tres" type="Material" id=6]
 [ext_resource path="res://materials/Grass.tres" type="Material" id=7]
 
-[node name="Terrain" type="Spatial"]
+[node name="Terrain" type="Node3D"]
 script = ExtResource( 2 )
 block = ExtResource( 1 )
 grass = ExtResource( 7 )

@@ -1,25 +1,25 @@
-extends Spatial
+extends Node3D
 
-export (PackedScene) var block;
-export (Material) var grass;
-export (Material) var dirt;
-export (Material) var sand;
-export (Material) var water;
-export (Material) var ice;
+@export var block: PackedScene;
+@export var grass: Material;
+@export var dirt: Material;
+@export var sand: Material;
+@export var water: Material;
+@export var ice: Material;
 
-export (int) var width = 128;
-export (int) var depth = 128;
-export (float) var blockSize = 0.2;
-export (float) var heightMultiplier = 50;
-export (float) var minValueBump = 0;
+@export var width: int = 128;
+@export var depth: int = 128;
+@export var blockSize: float = 0.2;
+@export var heightMultiplier: float = 50;
+@export var minValueBump: float = 0;
 
-var noise: OpenSimplexNoise;
+var noise: FastNoiseLite;
 
 func _ready():
 	
-	noise = OpenSimplexNoise.new();
+	noise = FastNoiseLite.new();
 	noise.seed = randi();
-	noise.octaves = 4;
+	noise.fractal_octaves = 4;
 	# noise.lacunarity = 1.5;
 	noise.period = 60;
 	# noise.persistence = 0.2;
@@ -29,7 +29,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if(event is InputEventKey):
-		if(event.scancode == KEY_M):
+		if(event.keycode == KEY_M):
 			Simulator.startedAnimation = true;
 
 func generateTerrain():
@@ -49,7 +49,7 @@ func generateCell(_layer: int, x: int, z: int):
 	
 	# mapPosition.y = height / 2;
 	
-	var cell: CSGBox = block.instance();
+	var cell: CSGBox3D = block.instantiate();
 	cell.width = blockSize;
 	# cell.height = height;
 	cell.targetHeight = height;
@@ -57,7 +57,7 @@ func generateCell(_layer: int, x: int, z: int):
 
 	cell.material = determineCellMaterial(height);
 
-	cell.translation = to_local(mapPosition);
+	cell.position = to_local(mapPosition);
 	add_child(cell);
 
 func determineCellMaterial(height: float) -> Material:
